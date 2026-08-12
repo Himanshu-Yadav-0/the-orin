@@ -28,9 +28,6 @@ jobs:
             echo "Pulling latest code..."
             git pull origin main
 
-            echo "Loading uv..."
-            source "$HOME/.local/bin/env"
-
             echo "Syncing dependencies..."
             uv sync
 
