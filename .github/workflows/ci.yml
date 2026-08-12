@@ -15,8 +15,8 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /home/ubuntu/app
+            cd /home/ec2-user/app
             git pull origin main
-            source $HOME/.cargo/env
+            source $HOME/.local/bin/env
             uv sync
             sudo systemctl restart fastapi-app
