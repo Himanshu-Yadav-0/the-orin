@@ -1,6 +1,21 @@
-def main():
-    print("Hello from the-orin!")
+from utils import is_wifi_connected
+from client.aws import aws_service
 
+import uvicorn
+
+from fastapi import FastAPI, UploadFile
+from typing import Annotated
+
+app = FastAPI()
+
+@app.post("/upload-files/")
+async def create_upload_file(file: UploadFile):
+    res = await aws_service.upload_to_s3(file)
+    return res
+    
+@app.get('/s3-files/')
+async def s3_files():
+    return aws_service.get_s3_files()
 
 if __name__ == "__main__":
-    main()
+    uvicorn.run(app,host="127.0.0.1",port=8000)
