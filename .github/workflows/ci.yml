@@ -2,21 +2,39 @@ name: Deploy to EC2
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: SSH into EC2 and deploy
+      - name: Deploy to EC2
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
+          script_stop: true
           script: |
+            set -e
+
+            echo "Connected successfully!"
+            echo "User: $(whoami)"
+
             cd /home/ec2-user/app
+
+            echo "Pulling latest code..."
             git pull origin main
-            source $HOME/.local/bin/env
+
+            echo "Loading uv..."
+            source "$HOME/.local/bin/env"
+
+            echo "Syncing dependencies..."
             uv sync
+
+            echo "Restarting FastAPI..."
             sudo systemctl restart fastapi-app
+
+            echo "Deployment complete!"
