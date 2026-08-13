@@ -1,4 +1,4 @@
-from utils import is_wifi_connected
+from utils.utils import is_wifi_connected
 from client.aws import aws_service
 
 import uvicorn
