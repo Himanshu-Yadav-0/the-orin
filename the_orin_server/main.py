@@ -16,9 +16,11 @@ app = FastAPI()
 app.mount("/assets", StaticFiles(directory=ASSETS_DIR), name="assets")
 
 @app.post("/upload-files/")
-def create_upload_file(file: UploadFile):
-    file.filename = f"{uuid7()}-{file.filename}"
-    res = aws_client.upload_to_s3(file)
+def create_upload_file(files: list[UploadFile]):
+    res = []
+    for file in files: 
+        file.filename = f"{uuid7()}-{file.filename}"
+        res.append(aws_client.upload_to_s3(file))
     return res
     
 @app.get('/s3-files/')
