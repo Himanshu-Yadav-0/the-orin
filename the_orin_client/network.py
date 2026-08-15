@@ -1,10 +1,8 @@
 import ctypes
 import threading
 import socket
-from utils.os_op import get_dir_files
-from utils.utils import download_file
-from services.aws import get_presigned_diff
-import httpx
+from the_orin_server.services import cloud_client
+from the_orin_client.utils.os_op import utils
 
 iphlpapi = ctypes.windll.iphlpapi
 
@@ -53,10 +51,10 @@ def main():
             state = is_online()
             if state != last_state:
                 if state:
-                    files = get_presigned_diff(get_dir_files(DIR_PATH))
+                    files = cloud_client.get_presigned_diff(utils.get_dir_files(DIR_PATH))
                     if files:
                         for file in files:
-                            download_file(file, DIR_PATH)
+                            utils.download_file(file, DIR_PATH)
 
                         print("Done Downloading")
                     else:

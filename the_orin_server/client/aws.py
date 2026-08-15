@@ -3,7 +3,7 @@ import logging
 from botocore.exceptions import ClientError
 from botocore.config import Config
 
-class AWSService:
+class AwsClient:
     s3_client = boto3.client('s3')
     BUCKET_NAME ='orin-s3-demo-bucket'
     
@@ -51,4 +51,4 @@ class AWSService:
         # The response contains the presigned URL
         return response
         
-aws_service = AWSService()
+aws_client = AwsClient()
