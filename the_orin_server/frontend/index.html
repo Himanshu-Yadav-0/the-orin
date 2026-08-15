@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orin ♡ Upload</title>
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body>
+  <div class="sky" aria-hidden="true">
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+    <div class="sparkle sparkle-1">✦</div>
+    <div class="sparkle sparkle-2">✧</div>
+    <div class="sparkle sparkle-3">✦</div>
+    <div class="sparkle sparkle-4">✧</div>
+    <div class="sparkle sparkle-5">✦</div>
+  </div>
+
+  <main class="stage">
+    <h1 class="title">Orin <span class="heart">♡</span></h1>
+    <p class="subtitle">drop your files here, i'll keep them safe~</p>
+
+    <form id="upload-form">
+      <input type="file" id="file-input" multiple hidden />
+      <button type="button" id="upload-button" class="upload-button">
+        <span class="face">
+          <span class="eye left"></span>
+          <span class="eye right"></span>
+          <span class="blush blush-left"></span>
+          <span class="blush blush-right"></span>
+          <span class="mouth"></span>
+        </span>
+        <span class="label">Upload</span>
+      </button>
+    </form>
+
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+    <ul id="file-list" class="file-list"></ul>
+  </main>
+
+  <div id="drop-veil" class="drop-veil"><span>let go~ (๑>ᴗ&lt;๑)</span></div>
+
+  <script src="/app.js"></script>
+</body>
+
+</html>
