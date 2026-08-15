@@ -1,13 +1,11 @@
 import ctypes
 import threading
 import socket
-from the_orin_server.services import cloud_client
-from the_orin_client.utils.os_op import utils
+from services.sync_service import sync_service
+
 
 iphlpapi = ctypes.windll.iphlpapi
-
 CALLBACK_FUNC = ctypes.WINFUNCTYPE(None, ctypes.c_void_p, ctypes.c_void_p, ctypes.c_int)
-DIR_PATH = "C:/Users/Himanshu Yadav/Documents/the-orin-SyncDIR"
 wake_event = threading.Event()  # the "sleeping thread" signal
 
 
@@ -51,16 +49,10 @@ def main():
             state = is_online()
             if state != last_state:
                 if state:
-                    files = cloud_client.get_presigned_diff(utils.get_dir_files(DIR_PATH))
-                    if files:
-                        for file in files:
-                            utils.download_file(file, DIR_PATH)
-
-                        print("Done Downloading")
-                    else:
-                        print("Nothing to download")
+                    print("Connected!!!")
+                    sync_service.sync()
                 else:
-                    print("bye")
+                    print("Disconnected!!")
                 last_state = state
     except KeyboardInterrupt:
         iphlpapi.CancelMibChangeNotify2(handle)
