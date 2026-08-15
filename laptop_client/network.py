@@ -1,11 +1,15 @@
 import ctypes
 import threading
 import socket
+from utils.os_op import get_dir_files
+from utils.utils import download_file
+from services.aws import get_presigned_diff
+import httpx
 
 iphlpapi = ctypes.windll.iphlpapi
 
 CALLBACK_FUNC = ctypes.WINFUNCTYPE(None, ctypes.c_void_p, ctypes.c_void_p, ctypes.c_int)
-
+DIR_PATH = "C:/Users/Himanshu Yadav/Documents/the-orin-SyncDIR"
 wake_event = threading.Event()  # the "sleeping thread" signal
 
 
@@ -48,7 +52,17 @@ def main():
             wake_event.clear()
             state = is_online()
             if state != last_state:
-                print("Hello" if state else "Bye")
+                if state:
+                    files = get_presigned_diff(get_dir_files(DIR_PATH))
+                    if files:
+                        for file in files:
+                            download_file(file, DIR_PATH)
+
+                        print("Done Downloading")
+                    else:
+                        print("Nothing to download")
+                else:
+                    print("bye")
                 last_state = state
     except KeyboardInterrupt:
         iphlpapi.CancelMibChangeNotify2(handle)
