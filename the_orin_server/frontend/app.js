@@ -31,7 +31,7 @@ async function uploadFiles(files) {
   let sent = 0;
   for (const file of files) {
     const body = new FormData();
-    body.append("file", file);
+    body.append("files", file);
 
     const item = document.createElement("li");
     item.textContent = `⏳ ${file.name}`;
