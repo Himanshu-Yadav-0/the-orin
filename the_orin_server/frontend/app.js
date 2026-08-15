@@ -4,6 +4,17 @@ const statusEl = document.getElementById("status");
 const fileList = document.getElementById("file-list");
 const dropVeil = document.getElementById("drop-veil");
 
+const successSound = new Audio(
+  "/assets/shinobu-kocho-ara-ara-sayonara-demon-slayer-type.wav"
+);
+successSound.preload = "auto";
+
+function playSuccessSound() {
+  successSound.currentTime = 0;
+  // Browsers reject playback without a user gesture; nothing to do if so.
+  successSound.play().catch(() => {});
+}
+
 function setStatus(message, kind) {
   statusEl.textContent = message;
   statusEl.className = kind ? `status ${kind}` : "status";
@@ -39,6 +50,7 @@ async function uploadFiles(files) {
   uploadButton.classList.remove("busy");
   if (sent === files.length) {
     setStatus("all done! (๑˃ᴗ˂)ﻭ", "ok");
+    playSuccessSound();
   } else {
     setStatus(`${sent}/${files.length} uploaded... (｡•́︿•̀｡)`, "err");
   }

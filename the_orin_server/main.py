@@ -6,10 +6,14 @@ from pathlib import Path
 from uuid import uuid7
 
 from fastapi import FastAPI, UploadFile
+from fastapi.staticfiles import StaticFiles
 
 FRONTEND_DIR = Path(__file__).parent / "frontend"
+ASSETS_DIR = Path(__file__).parent / "assets"
 
 app = FastAPI()
+
+app.mount("/assets", StaticFiles(directory=ASSETS_DIR), name="assets")
 
 @app.post("/upload-files/")
 def create_upload_file(file: UploadFile):
