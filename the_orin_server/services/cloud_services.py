@@ -1,4 +1,4 @@
-from client.aws import aws_client
+from the_orin_server.client.aws import aws_client
 
 class CloudService:
 
@@ -14,5 +14,5 @@ class CloudService:
 cloud_client = CloudService()
 
 __all__ = [
-    cloud_client
+    "cloud_client"
 ]

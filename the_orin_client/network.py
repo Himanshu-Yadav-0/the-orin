@@ -1,7 +1,7 @@
 import ctypes
 import threading
 import socket
-from services.sync_service import sync_service
+from the_orin_client.services.sync_service import sync_service
 
 
 iphlpapi = ctypes.windll.iphlpapi
