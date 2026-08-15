@@ -1,7 +1,7 @@
 from pathlib import Path
 import httpx
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import urlparse , unquote
 from loguru import logger
 
 class Utils:
@@ -16,7 +16,7 @@ class Utils:
         directory = Path(directory)
         directory.mkdir(parents=True, exist_ok=True)
 
-        filename = Path(urlparse(url).path).name
+        filename = Path(unquote(urlparse(url).path)).name
         file_path = directory / filename
 
         logger.info("Starting download: {}", filename)
@@ -85,4 +85,4 @@ class Utils:
         
 utils = Utils()
 
-__all__ =[utils]
+__all__ =["utils"]

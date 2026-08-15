@@ -1,15 +1,16 @@
-from utils.utils import is_wifi_connected
+
 from client.aws import aws_client
 
 import uvicorn
+from uuid import uuid7
 
 from fastapi import FastAPI, UploadFile
-from typing import Annotated
 
 app = FastAPI()
 
 @app.post("/upload-files/")
 def create_upload_file(file: UploadFile):
+    file.filename = f"{uuid7()}-{file.filename}"
     res = aws_client.upload_to_s3(file)
     return res
     
