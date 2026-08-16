@@ -3,6 +3,57 @@ const uploadButton = document.getElementById("upload-button");
 const statusEl = document.getElementById("status");
 const fileList = document.getElementById("file-list");
 const dropVeil = document.getElementById("drop-veil");
+const themeToggle = document.getElementById("theme-toggle");
+
+const THEME_KEY = "orin-theme";
+
+// Everything visual lives in style.css; only the wording is theme-aware here.
+const VOICE = {
+  light: {
+    pending: "⏳",
+    ok: "🌸",
+    fail: "💔",
+    sending: (n) => `sending ${n} file${n > 1 ? "s" : ""}...`,
+    done: "all done! (๑˃ᴗ˂)ﻭ",
+    partial: (sent, total) => `${sent}/${total} uploaded... (｡•́︿•̀｡)`,
+    switchTo: "switch to the dark side",
+  },
+  dark: {
+    pending: "⌛",
+    ok: "🖤",
+    fail: "⚔",
+    sending: (n) => `claiming ${n} offering${n > 1 ? "s" : ""}...`,
+    done: "sealed in the vault. ara ara~",
+    partial: (sent, total) => `only ${sent}/${total} surrendered... how disappointing.`,
+    switchTo: "switch to the sweet side",
+  },
+};
+
+function currentTheme() {
+  return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+}
+
+function voice() {
+  return VOICE[currentTheme()];
+}
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  themeToggle.setAttribute("aria-pressed", String(theme === "dark"));
+  themeToggle.setAttribute("aria-label", VOICE[theme].switchTo);
+}
+
+applyTheme(currentTheme());
+
+themeToggle.addEventListener("click", () => {
+  const next = currentTheme() === "dark" ? "light" : "dark";
+  applyTheme(next);
+  try {
+    localStorage.setItem(THEME_KEY, next);
+  } catch (error) {
+    // Private browsing can block storage; the toggle still works for this visit.
+  }
+});
 
 const successSound = new Audio(
   "/assets/shinobu-kocho-ara-ara-sayonara-demon-slayer-type.wav"
@@ -26,7 +77,7 @@ async function uploadFiles(files) {
 
   uploadButton.classList.add("busy");
   fileList.innerHTML = "";
-  setStatus(`sending ${files.length} file${files.length > 1 ? "s" : ""}...`);
+  setStatus(voice().sending(files.length));
 
   let sent = 0;
   for (const file of files) {
@@ -34,25 +85,25 @@ async function uploadFiles(files) {
     body.append("files", file);
 
     const item = document.createElement("li");
-    item.textContent = `⏳ ${file.name}`;
+    item.textContent = `${voice().pending} ${file.name}`;
     fileList.appendChild(item);
 
     try {
       const response = await fetch("/upload-files/", { method: "POST", body });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      item.textContent = `🌸 ${file.name}`;
+      item.textContent = `${voice().ok} ${file.name}`;
       sent += 1;
     } catch (error) {
-      item.textContent = `💔 ${file.name} — ${error.message}`;
+      item.textContent = `${voice().fail} ${file.name} — ${error.message}`;
     }
   }
 
   uploadButton.classList.remove("busy");
   if (sent === files.length) {
-    setStatus("all done! (๑˃ᴗ˂)ﻭ", "ok");
+    setStatus(voice().done, "ok");
     playSuccessSound();
   } else {
-    setStatus(`${sent}/${files.length} uploaded... (｡•́︿•̀｡)`, "err");
+    setStatus(voice().partial(sent, files.length), "err");
   }
 }
 

@@ -1,11 +1,138 @@
-:root {
-  --pink: #ffb7d5;
-  --pink-deep: #ff8fbe;
-  --pink-shadow: #e0619a;
-  --cream: #fff6fa;
-  --mint: #b9f0e2;
-  --lilac: #d9c7ff;
+/* Both themes share every rule below; only the tokens in these two blocks
+   differ, so the layout and motion stay identical across the switch. */
+
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+
+  --page-bg:
+    radial-gradient(circle at 20% 15%, #fff0f7 0%, transparent 45%),
+    radial-gradient(circle at 80% 20%, #eef4ff 0%, transparent 40%),
+    radial-gradient(circle at 50% 100%, #ffe3f1 0%, transparent 55%),
+    linear-gradient(160deg, #ffe9f4 0%, #f4ecff 50%, #e6fbf5 100%);
+
   --ink: #7a4a63;
+  --title-color: #ff6fae;
+  --title-shadow: 3px 3px 0 #fff, 6px 6px 0 rgba(255, 143, 190, 0.28);
+
+  --accent: #ffb7d5;
+  --accent-deep: #ff8fbe;
+  --accent-shadow: #e0619a;
+  --focus: #d9c7ff;
+
+  --cloud-bg: #fff;
+  --cloud-opacity: 0.75;
+  --cloud-filter: drop-shadow(0 12px 18px rgba(224, 97, 154, 0.12));
+
+  --sparkle-color: #ffd9ec;
+  --sparkle-glow: rgba(255, 143, 190, 0.6);
+
+  --btn-bg: linear-gradient(160deg, var(--accent) 0%, var(--accent-deep) 100%);
+  --btn-border: #fff;
+  --btn-shadow:
+    0 14px 0 var(--accent-shadow),
+    0 26px 40px rgba(224, 97, 154, 0.35),
+    inset 0 -10px 24px rgba(255, 255, 255, 0.35);
+  --btn-shadow-active:
+    0 4px 0 var(--accent-shadow),
+    0 10px 18px rgba(224, 97, 154, 0.3);
+  --label-color: #fff;
+  --label-shadow: 0 2px 0 rgba(224, 97, 154, 0.6);
+
+  --eye-color: #5b3247;
+  --eye-glow: transparent;
+  --blush-color: #ff7bab;
+  --blush-opacity: 0.65;
+  --blush-blur: 1px;
+
+  --ok: #2fa98a;
+  --err: #e0619a;
+
+  --chip-bg: rgba(255, 255, 255, 0.8);
+  --chip-border: #ffd9ec;
+  --chip-shadow: 0 4px 10px rgba(224, 97, 154, 0.12);
+
+  --veil-bg: rgba(255, 233, 244, 0.85);
+  --veil-border: var(--accent);
+  --veil-color: #ff6fae;
+
+  --toggle-bg: rgba(255, 255, 255, 0.75);
+  --toggle-shadow: 0 6px 16px rgba(224, 97, 154, 0.2);
+  --track-bg: #ffd9ec;
+  --knob-bg: #fff;
+
+  --glyph: "♡";
+  --subtitle-text: "drop your files here, i'll keep them safe~";
+  --veil-text: "let go~ (๑>ᴗ<๑)";
+  --toggle-text: "sweet";
+  --knob-glyph: "☀";
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --page-bg:
+    radial-gradient(circle at 20% 15%, #2b0d31 0%, transparent 45%),
+    radial-gradient(circle at 80% 20%, #14102e 0%, transparent 40%),
+    radial-gradient(circle at 50% 100%, #3d0620 0%, transparent 55%),
+    linear-gradient(160deg, #0d0711 0%, #150a1c 50%, #090610 100%);
+
+  --ink: #e3cfe0;
+  --title-color: #ff3b6b;
+  --title-shadow: 0 0 14px rgba(255, 45, 99, 0.65), 4px 4px 0 #2b0d31;
+
+  --accent: #b01446;
+  --accent-deep: #4a0a2a;
+  --accent-shadow: #37041b;
+  --focus: #ff3b6b;
+
+  --cloud-bg: #1b0f24;
+  --cloud-opacity: 0.85;
+  --cloud-filter: drop-shadow(0 12px 24px rgba(255, 45, 99, 0.18)) blur(2px);
+
+  --sparkle-color: #ff4d6d;
+  --sparkle-glow: rgba(255, 45, 99, 0.9);
+
+  --btn-bg: linear-gradient(160deg, var(--accent) 0%, var(--accent-deep) 100%);
+  --btn-border: #ff3b6b;
+  --btn-shadow:
+    0 14px 0 var(--accent-shadow),
+    0 26px 50px rgba(255, 45, 99, 0.35),
+    inset 0 -10px 26px rgba(0, 0, 0, 0.55),
+    inset 0 0 30px rgba(255, 59, 107, 0.25);
+  --btn-shadow-active:
+    0 4px 0 var(--accent-shadow),
+    0 10px 22px rgba(255, 45, 99, 0.35);
+  --label-color: #ffe3ec;
+  --label-shadow: 0 0 12px rgba(255, 45, 99, 0.9);
+
+  --eye-color: #ff4d6d;
+  --eye-glow: rgba(255, 45, 99, 0.85);
+  --blush-color: #ff2e5e;
+  --blush-opacity: 0.4;
+  --blush-blur: 5px;
+
+  --ok: #a3e635;
+  --err: #ff2e5e;
+
+  --chip-bg: rgba(24, 11, 28, 0.8);
+  --chip-border: #5c1436;
+  --chip-shadow: 0 4px 12px rgba(0, 0, 0, 0.55);
+
+  --veil-bg: rgba(9, 5, 14, 0.88);
+  --veil-border: #b01446;
+  --veil-color: #ff4d6d;
+
+  --toggle-bg: rgba(28, 13, 33, 0.8);
+  --toggle-shadow: 0 6px 18px rgba(255, 45, 99, 0.22);
+  --track-bg: #3a0a22;
+  --knob-bg: #ff3b6b;
+
+  --glyph: "†";
+  --subtitle-text: "hand them over. nothing leaves this vault.";
+  --veil-text: "release them. (￣ー￣)";
+  --toggle-text: "sinister";
+  --knob-glyph: "☾";
 }
 
 * {
@@ -23,22 +150,9 @@ body {
   place-items: center;
   font-family: "Comic Sans MS", "Segoe UI Rounded", "Quicksand", system-ui, sans-serif;
   color: var(--ink);
-  background:
-    radial-gradient(circle at 20% 15%, #fff0f7 0%, transparent 45%),
-    radial-gradient(circle at 80% 20%, #eef4ff 0%, transparent 40%),
-    radial-gradient(circle at 50% 100%, #ffe3f1 0%, transparent 55%),
-    linear-gradient(160deg, #ffe9f4 0%, #f4ecff 50%, #e6fbf5 100%);
+  background: var(--page-bg);
   overflow: hidden;
-}
-
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.75) 1.5px, transparent 1.6px);
-  background-size: 26px 26px;
-  opacity: 0.6;
+  transition: color 0.4s ease;
 }
 
 /* ---------- background decorations ---------- */
@@ -49,14 +163,22 @@ body::after {
   pointer-events: none;
 }
 
+/* Vignette that closes in around the stage on the dark side. */
+[data-theme="dark"] .sky::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 35%, rgba(0, 0, 0, 0.72) 100%);
+}
+
 .cloud {
   position: absolute;
   width: 180px;
   height: 60px;
-  background: #fff;
+  background: var(--cloud-bg);
   border-radius: 60px;
-  opacity: 0.75;
-  filter: drop-shadow(0 12px 18px rgba(224, 97, 154, 0.12));
+  opacity: var(--cloud-opacity);
+  filter: var(--cloud-filter);
   animation: drift 26s linear infinite;
 }
 
@@ -64,7 +186,7 @@ body::after {
 .cloud::after {
   content: "";
   position: absolute;
-  background: #fff;
+  background: var(--cloud-bg);
   border-radius: 50%;
 }
 
@@ -114,8 +236,8 @@ body::after {
 .sparkle {
   position: absolute;
   font-size: 22px;
-  color: #ffd9ec;
-  text-shadow: 0 0 10px rgba(255, 143, 190, 0.6);
+  color: var(--sparkle-color);
+  text-shadow: 0 0 10px var(--sparkle-glow);
   animation: twinkle 3.4s ease-in-out infinite;
 }
 
@@ -128,6 +250,76 @@ body::after {
 @keyframes twinkle {
   0%, 100% { opacity: 0.25; transform: scale(0.8) rotate(0deg); }
   50% { opacity: 1; transform: scale(1.25) rotate(20deg); }
+}
+
+/* ---------- theme toggle ---------- */
+
+.theme-toggle {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 18px 7px 7px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--ink);
+  background: var(--toggle-bg);
+  box-shadow: var(--toggle-shadow);
+  transition: background 0.4s ease, box-shadow 0.4s ease, color 0.4s ease,
+    transform 0.16s ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+}
+
+.theme-toggle:focus-visible {
+  outline: 3px dashed var(--focus);
+  outline-offset: 4px;
+}
+
+.toggle-track {
+  position: relative;
+  width: 52px;
+  height: 26px;
+  border-radius: 999px;
+  background: var(--track-bg);
+  transition: background 0.4s ease;
+}
+
+.toggle-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: 12px;
+  background: var(--knob-bg);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  transition: translate 0.32s cubic-bezier(0.68, -0.5, 0.27, 1.5), background 0.4s ease;
+}
+
+.toggle-knob::before {
+  content: var(--knob-glyph);
+}
+
+[data-theme="dark"] .toggle-knob {
+  translate: 26px 0;
+}
+
+.toggle-text::before {
+  content: var(--toggle-text);
 }
 
 /* ---------- stage ---------- */
@@ -147,13 +339,22 @@ body::after {
   margin: 0;
   font-size: clamp(2.2rem, 6vw, 3.4rem);
   letter-spacing: 2px;
-  color: #ff6fae;
-  text-shadow: 3px 3px 0 #fff, 6px 6px 0 rgba(255, 143, 190, 0.28);
+  color: var(--title-color);
+  text-shadow: var(--title-shadow);
+  transition: color 0.4s ease;
 }
 
-.heart {
+.glyph {
   display: inline-block;
   animation: beat 1.4s ease-in-out infinite;
+}
+
+.glyph::before {
+  content: var(--glyph);
+}
+
+[data-theme="dark"] .glyph {
+  animation-duration: 2.8s;
 }
 
 @keyframes beat {
@@ -167,23 +368,25 @@ body::after {
   opacity: 0.75;
 }
 
+.subtitle::before {
+  content: var(--subtitle-text);
+}
+
 /* ---------- the big button ---------- */
 
 .upload-button {
   position: relative;
   width: clamp(200px, 46vw, 260px);
   height: clamp(200px, 46vw, 260px);
-  border: 6px solid #fff;
+  border: 6px solid var(--btn-border);
   border-radius: 50%;
   cursor: pointer;
   font: inherit;
-  color: #fff;
-  background: linear-gradient(160deg, var(--pink) 0%, var(--pink-deep) 100%);
-  box-shadow:
-    0 14px 0 var(--pink-shadow),
-    0 26px 40px rgba(224, 97, 154, 0.35),
-    inset 0 -10px 24px rgba(255, 255, 255, 0.35);
-  transition: transform 0.16s ease, box-shadow 0.16s ease;
+  color: var(--label-color);
+  background: var(--btn-bg);
+  box-shadow: var(--btn-shadow);
+  transition: transform 0.16s ease, box-shadow 0.4s ease, border-color 0.4s ease,
+    background 0.4s ease;
   animation: float 3.6s ease-in-out infinite;
 }
 
@@ -198,13 +401,11 @@ body::after {
 
 .upload-button:active {
   transform: translateY(10px) scale(0.98);
-  box-shadow:
-    0 4px 0 var(--pink-shadow),
-    0 10px 18px rgba(224, 97, 154, 0.3);
+  box-shadow: var(--btn-shadow-active);
 }
 
 .upload-button:focus-visible {
-  outline: 4px dashed var(--lilac);
+  outline: 4px dashed var(--focus);
   outline-offset: 8px;
 }
 
@@ -218,13 +419,25 @@ body::after {
   top: 34%;
   width: 16px;
   height: 22px;
-  background: #5b3247;
+  background: var(--eye-color);
   border-radius: 50%;
+  box-shadow: 0 0 14px var(--eye-glow);
   animation: blink 4.5s infinite;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
 }
 
 .eye.left { left: 32%; }
 .eye.right { right: 32%; }
+
+/* Wide innocent eyes narrow into a glowing glare. */
+[data-theme="dark"] .eye {
+  width: 24px;
+  height: 12px;
+  border-radius: 50% / 65% 65% 35% 35%;
+}
+
+[data-theme="dark"] .eye.left { rotate: 14deg; }
+[data-theme="dark"] .eye.right { rotate: -14deg; }
 
 @keyframes blink {
   0%, 92%, 100% { transform: scaleY(1); }
@@ -236,10 +449,11 @@ body::after {
   top: 46%;
   width: 30px;
   height: 16px;
-  background: #ff7bab;
+  background: var(--blush-color);
   border-radius: 50%;
-  opacity: 0.65;
-  filter: blur(1px);
+  opacity: var(--blush-opacity);
+  filter: blur(var(--blush-blur));
+  transition: background 0.4s ease, opacity 0.4s ease;
 }
 
 .blush-left { left: 20%; }
@@ -252,10 +466,32 @@ body::after {
   width: 26px;
   height: 14px;
   translate: -50% 0;
-  border: 3px solid #5b3247;
+  border: 3px solid var(--eye-color);
   border-top: none;
   border-radius: 0 0 26px 26px;
+  transition: border-color 0.4s ease;
 }
+
+/* The same arc, skewed into a fanged smirk. */
+[data-theme="dark"] .mouth {
+  width: 36px;
+  height: 11px;
+  border-radius: 0 0 30px 4px;
+  rotate: -9deg;
+}
+
+[data-theme="dark"] .mouth::before,
+[data-theme="dark"] .mouth::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 9px solid var(--eye-color);
+}
+
+[data-theme="dark"] .mouth::before { left: 3px; }
+[data-theme="dark"] .mouth::after { right: 5px; }
 
 .label {
   position: absolute;
@@ -265,7 +501,7 @@ body::after {
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: 3px;
-  text-shadow: 0 2px 0 rgba(224, 97, 154, 0.6);
+  text-shadow: var(--label-shadow);
 }
 
 .upload-button.busy {
@@ -287,8 +523,8 @@ body::after {
   font-weight: 700;
 }
 
-.status.ok { color: #2fa98a; }
-.status.err { color: #e0619a; }
+.status.ok { color: var(--ok); }
+.status.err { color: var(--err); }
 
 .file-list {
   max-width: min(420px, 88vw);
@@ -303,13 +539,14 @@ body::after {
 .file-list li {
   margin-bottom: 6px;
   padding: 7px 14px;
-  background: rgba(255, 255, 255, 0.8);
-  border: 2px solid #ffd9ec;
+  background: var(--chip-bg);
+  border: 2px solid var(--chip-border);
   border-radius: 999px;
-  box-shadow: 0 4px 10px rgba(224, 97, 154, 0.12);
+  box-shadow: var(--chip-shadow);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: background 0.4s ease, border-color 0.4s ease;
 }
 
 /* ---------- drag veil ---------- */
@@ -321,12 +558,16 @@ body::after {
   display: grid;
   place-items: center;
   font-size: clamp(1.4rem, 5vw, 2.4rem);
-  color: #ff6fae;
-  background: rgba(255, 233, 244, 0.85);
-  border: 10px dashed var(--pink);
+  color: var(--veil-color);
+  background: var(--veil-bg);
+  border: 10px dashed var(--veil-border);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.18s ease;
+}
+
+.drop-veil span::before {
+  content: var(--veil-text);
 }
 
 .drop-veil.on {

@@ -7,6 +7,17 @@
   <title>Orin ♡ Upload</title>
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>" />
+  <script>
+    // Runs before paint so the saved theme doesn't flash the wrong palette.
+    (function () {
+      var stored = null;
+      try { stored = localStorage.getItem("orin-theme"); } catch (e) { }
+      var dark = stored
+        ? stored === "dark"
+        : window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = dark ? "dark" : "light";
+    })();
+  </script>
   <link rel="stylesheet" href="/style.css" />
 </head>
 
@@ -22,14 +33,21 @@
     <div class="sparkle sparkle-5">✦</div>
   </div>
 
+  <button type="button" id="theme-toggle" class="theme-toggle" aria-pressed="false">
+    <span class="toggle-track" aria-hidden="true">
+      <span class="toggle-knob"></span>
+    </span>
+    <span class="toggle-text" aria-hidden="true"></span>
+  </button>
+
   <main class="stage">
-    <h1 class="title">Orin <span class="heart">♡</span></h1>
-    <p class="subtitle">drop your files here, i'll keep them safe~</p>
+    <h1 class="title">Orin <span class="glyph" aria-hidden="true"></span></h1>
+    <p class="subtitle"></p>
 
     <form id="upload-form">
       <input type="file" id="file-input" multiple hidden />
       <button type="button" id="upload-button" class="upload-button">
-        <span class="face">
+        <span class="face" aria-hidden="true">
           <span class="eye left"></span>
           <span class="eye right"></span>
           <span class="blush blush-left"></span>
@@ -44,7 +62,7 @@
     <ul id="file-list" class="file-list"></ul>
   </main>
 
-  <div id="drop-veil" class="drop-veil"><span>let go~ (๑>ᴗ&lt;๑)</span></div>
+  <div id="drop-veil" class="drop-veil"><span></span></div>
 
   <script src="/app.js"></script>
 </body>
